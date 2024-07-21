@@ -54,14 +54,15 @@ dxb = xb(2, :)-xb(1, :);
 dyb = yb(2, :)-yb(1, :);
 
 %% solve for parameter values at intersection
-den = (dxb.*dya-dxa.*dyb);
-tb = (dx1.*dya-dy1.*dxa)./den;
-ta = (dx1.*dyb-dy1.*dxb)./den;
+% while denominator is common, recalculating is slightly faster for large
+% sets.
+tb = (dx1.*dya-dy1.*dxa)./(dxb.*dya-dxa.*dyb);
+ta = (dx1.*dyb-dy1.*dxb)./(dxb.*dya-dxa.*dyb);
 
 % replace intersection values outside of segment with nan's
 idx = ta<0 | ta>1 | tb<0 | tb>1;
-ta(idx) = nan;
+tb(idx) = nan;
 
 %% solve for x-y locations
-xi = xa(1, :)' + ta.*(xa(2, :)'-xa(1, :)');
-yi = ya(1, :)' + ta.*(ya(2, :)'-ya(1, :)');
+xi = xb(1, :) + tb.*(xb(2, :)-xb(1, :));
+yi = yb(1, :) + tb.*(yb(2, :)-yb(1, :));

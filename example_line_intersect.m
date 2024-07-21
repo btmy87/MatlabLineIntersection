@@ -23,7 +23,7 @@ if n > 1000
     return;
 end
 
-figure(Color="#22272e"); 
+figure; 
 ha = axes; hold on;
 xlabel("x"); ylabel("y");
 title("Example: line_intersect", Interpreter="none");
