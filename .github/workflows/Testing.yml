@@ -21,7 +21,7 @@ jobs:
   test:
     strategy:
       matrix: 
-        version: [latest, R2023b, R2022b, R2021a, R2020a]
+        version: [latest, R2023b, R2022b, R2021b, R2020b]
         os: [ubuntu-latest, windows-latest]
       
     # The type of runner that the job will run on
