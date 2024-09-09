@@ -4,7 +4,8 @@ function [xi, yi, ta, tb] = line_intersect(xa, ya, xb, yb)
 % returns nan if there's no intersection or segments are colinear
 %
 % [xi, yi] = line_intersect(xa, ya, xb, yb); Solvers for x-y coordinates
-% [xi, yi, ta, tb] = line_intersect(...); Also outputs parameter values
+% [xi, yi, ta, tb] = line_intersect(...); Also outputs parameter values at
+% intersection points.
 %
 % Inputs are 2xN arrays where each column is a line segment
 % Groups `a` and `b` can have different numbers of line segments.

@@ -1,2 +1,4 @@
 *.asv
 lineSegmentIntersect.m
+speed_comparison.m
+lineIntersection.m
