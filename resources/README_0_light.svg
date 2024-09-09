@@ -301,7 +301,7 @@
     ><g transform="translate(630.9803,204.3468)" style="stroke-linecap:butt; fill:rgb(237,177,32); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; stroke-linejoin:round; stroke:rgb(237,177,32); color-interpolation:linearRGB; stroke-width:2.5;"
     ><path style="stroke:none;" d="M0 -5.4167 C2.9915 -5.4167 5.4167 -2.9915 5.4167 0 L5.4167 0 C5.4167 2.9915 2.9915 5.4167 -0 5.4167 C-2.9915 5.4167 -5.4167 2.9915 -5.4167 -0 C-5.4167 -2.9915 -2.9915 -5.4167 0 -5.4167 ZM0 -7.9167 C-4.3723 -7.9167 -7.9167 -4.3723 -7.9167 -0 C-7.9167 4.3723 -4.3723 7.9167 -0 7.9167 C4.3723 7.9167 7.9167 4.3723 7.9167 0 L7.9167 0 C7.9167 -4.3723 4.3723 -7.9167 0 -7.9167 Z"
     /></g
-    ><g style="fill:none; text-rendering:optimizeSpeed; color-rendering:optimizeSpeed; image-rendering:optimizeSpeed; shape-rendering:crispEdges; stroke:white; color-interpolation:sRGB;"
+    ><g style="fill:rgb(254,254,254); text-rendering:optimizeSpeed; color-rendering:optimizeSpeed; image-rendering:optimizeSpeed; shape-rendering:crispEdges; stroke:rgb(254,254,254); color-interpolation:sRGB;"
     ><path style="stroke:none;" d="M360 134 L360 62 L158 62 L158 134 Z"
     /></g
     ><g transform="translate(216.8228,75.4533)" style="font-size:18px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'Cascadia Code'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
