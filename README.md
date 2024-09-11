@@ -1,10 +1,13 @@
 
 # MatlabLineIntersection
 
+[<img src="https://www.mathworks.com/matlabcentral/images/matlab%2Dfile%2Dexchange.svg">](https://www.mathworks.com/matlabcentral/fileexchange/172409-matlablineintersection) or [<img src="https://www.mathworks.com/images/responsive/global/open%2Din%2Dmatlab%2Donline.svg">](https://matlab.mathworks.com/open/github/v1?repo=btmy87/MatlabLineIntersection&file=README.mlx)
+
+
+[<img src="https://github.com/btmy87/MatlabLineIntersection/actions/workflows/Testing.yml/badge.svg">](https://github.com/btmy87/MatlabLineIntersection/actions/workflows/Testing.yml)
+
+
 Line Segment Intersection in MatLab
-
-
-<a rel="noopener" target="\_blank" href="https://www.mathworks.com/matlabcentral/fileexchange/172409\-matlablineintersection"><img alt="View on File Exchange" src="https://www.mathworks.com/matlabcentral/images/matlab\-file\-exchange.svg"></a>
 
 
 Finds intersection points between two sets of line segments.  Returns nan where there is no intersection or segments are colinear.
