@@ -4,6 +4,9 @@
 Line Segment Intersection in MatLab
 
 
+<a rel="noopener" target="\_blank" href="https://www.mathworks.com/matlabcentral/fileexchange/172409\-matlablineintersection"><img alt="View on File Exchange" src="https://www.mathworks.com/matlabcentral/images/matlab\-file\-exchange.svg"></a>
+
+
 Finds intersection points between two sets of line segments.  Returns nan where there is no intersection or segments are colinear.
 
 # Example: Two sets of Line Segments
@@ -78,4 +81,11 @@ plot(xv1(:), yv1(:), "o")
   <source media="(prefers-color-scheme: light)" srcset="resources/README_1_light.svg">
   <img alt="figure_1" src="resources/README_1_light.svg">
 </picture>
+
+# Alternatives
+
+There are several functions on the file exchange that calculate the intersections, but most do not handle all intersections between two sets.  The closest is the link below.  The version provided in this repository is moderately faster for large sets, thousands of lines.  This is due to modern MATLAB array expansion techniques and fewer outputs.  If you need information on whether line segments are parallel or coincident, the version below is recommended.
+
+
+[https://www.mathworks.com/matlabcentral/fileexchange/27205\-fast\-line\-segment\-intersection](https://www.mathworks.com/matlabcentral/fileexchange/27205-fast-line-segment-intersection)
 
