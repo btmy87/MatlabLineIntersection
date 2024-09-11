@@ -23,10 +23,10 @@ jobs:
       matrix: 
         version: [latest, R2023b, R2022b, R2021a]
         os: [ubuntu-latest, windows-latest]
+      fail-fast: false
       
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
-    continue-on-error: true
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
