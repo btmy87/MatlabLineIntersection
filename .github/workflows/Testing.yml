@@ -23,7 +23,7 @@ jobs:
       matrix: 
         #version: [latest, R2023b, R2023a, R2022b, R2022a, R2021b, R2021a]
         #os: [ubuntu-latest, windows-latest, macos-13]
-        version: [latest, R2023b, R2022b, R2021a]
+        version: [R2024b, R2023b, R2022b, R2021a]
         os: [ubuntu-latest, windows-latest]
         include:
           - os: macos-14

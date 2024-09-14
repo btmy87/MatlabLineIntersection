@@ -9,8 +9,8 @@ files = dir("artifacts/*.json");
 
 % want shorter OS names
 dOS = configureDictionary("string", "string");
-dOS("ubuntu-latest") = "Lin";
-dOS("windows-latest") = "Win";
+dOS("ubuntu-latest") = "Linux";
+dOS("windows-latest") = "Windows";
 dOS("macos-latest") = "Mac";
 dOS("macos-14") = "Mac14";
 dOS("macos-13") = "Mac13";
