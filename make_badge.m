@@ -13,7 +13,7 @@ badge = "<svg>"; % side-by-side, but doesn't work in github
 % want shorter OS names
 dOS = configureDictionary("string", "string");
 dOS("ubuntu-latest") = "Lin";
-dOS("win-latest") = "Win";
+dOS("windows-latest") = "Win";
 dOS("macos-latest") = "Mac";
 dOS("macos-14") = "Mac14";
 dOS("macos-13") = "Mac13";
