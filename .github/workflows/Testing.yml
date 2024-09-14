@@ -102,6 +102,6 @@ jobs:
         with:
           token: ${{ secrets.BADGE_SECRET }}
           gist_id: 0f25477c0a3820599438e573cee862a3
-          file_path: ./badge.svg
+          file_path: ./artifacts/badge.svg
           file_type: binary
 
