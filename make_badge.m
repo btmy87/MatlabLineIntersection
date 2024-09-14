@@ -6,9 +6,7 @@ clear
 files = dir("artifacts/*.json");
 
 % badge will concatenate individual svg elements
-% badge = "<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" role=""img"">"; % all badges on top of one another
-
-badge = "<svg>"; % side-by-side, but doesn't work in github
+badge = "<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" role=""img"">"; % all badges on top of one another
 
 % want shorter OS names
 dOS = configureDictionary("string", "string");
@@ -28,6 +26,8 @@ spacer = "<svg width=""2"" height=""20""><text> </text></svg>";
 % concatenating into a single, nested svg element.
 baseUrl = "https://img.shields.io/badge";
 opts = weboptions(ContentType="text");
+x = 0;
+y = 0;
 for i = 1:numel(files)
     f = fullfile(files(i).folder, files(i).name);
     temp = readstruct(f);
@@ -39,8 +39,19 @@ for i = 1:numel(files)
     tempId = "r" + i;
     tempBadge2 = strrep(tempBadge, "id=""r""", "id=""r"+i+"""");
     tempBadge3 = strrep(tempBadge2, "url(#r)", "url(#r"+i+")");
+    tempBadge4 = strrep(tempBadge3, "aria-label", ...
+        sprintf("x=""%.0f"" y=""%.0f"" aria-label", x, y));
 
-    badge = badge + tempBadge3 + spacer;
+    % get x for next offset
+    widthStr = regexp(tempBadge, "width=""(\d+)""", "tokens", "once");
+    heightStr = regexp(tempBadge, "height=""(\d+)""", "tokens", "once");
+    x = x + double(widthStr) + 2;
+    if x > 400
+        x = 0;
+        y = y + double(heightStr) + 2;
+    end
+
+    badge = badge + tempBadge4;
 end
 badge = badge + "</svg>";
 writelines(badge, "./artifacts/badge.svg");
