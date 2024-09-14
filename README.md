@@ -7,6 +7,9 @@
 [<img src="https://github.com/btmy87/MatlabLineIntersection/actions/workflows/Testing.yml/badge.svg">](https://github.com/btmy87/MatlabLineIntersection/actions/workflows/Testing.yml)
 
 
+[<img src="https://gist.githubusercontent.com/btmy87/0f25477c0a3820599438e573cee862a3/raw/badge.svg" />](https://gist.githubusercontent.com/btmy87/0f25477c0a3820599438e573cee862a3/raw/badge.svg)
+
+
 Line Segment Intersection in MatLab
 
 
@@ -18,7 +21,7 @@ Find the intersection points between two sets of line setments
 
 ```matlab
 
-n = 10;
+n = 9;
 
 % first the 'a' set, we'll use a set of parallel lines
 xa = [0; 1] - linspace(-0.5, 0.5, n);

@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Unit_Tests-
+name: Unit_Tests
 
 # Controls when the workflow will run
 on: 
@@ -21,8 +21,15 @@ jobs:
   test:
     strategy:
       matrix: 
+        #version: [latest, R2023b, R2023a, R2022b, R2022a, R2021b, R2021a]
+        #os: [ubuntu-latest, windows-latest, macos-13]
         version: [latest, R2023b, R2022b, R2021a]
         os: [ubuntu-latest, windows-latest]
+        include:
+          - os: macos-14
+            version: latest
+          - os: macos-14
+            version: R2023b
       fail-fast: false
       
     # The type of runner that the job will run on
@@ -33,6 +40,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: make failing artifact
+        shell: bash
+        run: |
+          echo "{
+            os: "${{matrix.os}}",
+            version: "${{matrix.version}}",
+            status: "fail"
+          }" > ${{matrix.os}}-${{matrix.version}}-results.json
+
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with: 
@@ -40,3 +56,49 @@ jobs:
 
       - name: Run tests
         uses: matlab-actions/run-tests@v2
+
+      - name: make passing artifact
+        shell: bash
+        run: |
+          echo "{
+            os: "${{matrix.os}}",
+            version: "${{matrix.version}}",
+            status: "pass"
+          }" > ${{matrix.os}}-${{matrix.version}}-results.json
+          
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{matrix.os}}-${{matrix.version}}-results
+          path: ${{matrix.os}}-${{matrix.version}}-results.json
+          retention-days: 1
+          compression-level: 0
+
+  make_badge:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: ./artifacts
+
+      - name: make badge svg
+        uses: matlab-actions/run-command@v2
+        with:
+          command: make_badge
+
+      - name: upload badge
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.BADGE_SECRET }}
+          gist_id: 0f25477c0a3820599438e573cee862a3
+          file_path: ./badge.svg
+          file_type: binary
+

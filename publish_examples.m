@@ -13,7 +13,9 @@ if nargin < 1
     end
     for i = 1:length(allfiles)
         fprintf("Publishing: %s to markdown\n", allfiles(i).name)
+        tic
         publish_examples(allfiles(i).name);
+        toc
     end
     return;
 end
