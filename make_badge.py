@@ -29,7 +29,7 @@ for i, file in enumerate(glob.glob("./artifacts/*.json")):
         res = json.load(fid)
 
     # Get badge from shields.io
-    url = BASE_URL + f"{OS[res["os"]]}:{res["version"]}-{res["status"]}-{STATUS[res["status"]]}"
+    url = BASE_URL + f'{OS[res["os"]]}:{res["version"]}-{res["status"]}-{STATUS[res["status"]]}'
     print(f"Getting badge from url: {url}")
 
     req = urllib.request.Request(url)
