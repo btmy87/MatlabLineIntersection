@@ -6,7 +6,9 @@ clear
 files = dir("artifacts/*.json");
 
 % badge will concatenate individual svg elements
-badge = "<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" role=""img"">";
+% badge = "<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" role=""img"">"; % all badges on top of one another
+
+badge = "<svg>"; % side-by-side, but doesn't work in github
 
 % want shorter OS names
 dOS = configureDictionary("string", "string");
