@@ -6,7 +6,6 @@ clear
 files = dir("artifacts/*.json");
 
 % badge will concatenate individual svg elements
-badge = "<svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" role=""img"">"; % all badges on top of one another
 
 % want shorter OS names
 dOS = configureDictionary("string", "string");
@@ -28,6 +27,9 @@ baseUrl = "https://img.shields.io/badge";
 opts = weboptions(ContentType="text");
 x = 0;
 y = 0;
+width = 0;
+height = 0;
+badge = "";
 for i = 1:numel(files)
     f = fullfile(files(i).folder, files(i).name);
     temp = readstruct(f);
@@ -46,12 +48,17 @@ for i = 1:numel(files)
     widthStr = regexp(tempBadge, "width=""(\d+)""", "tokens", "once");
     heightStr = regexp(tempBadge, "height=""(\d+)""", "tokens", "once");
     x = x + double(widthStr) + 2;
+    width = max([width, x]);
     if x > 400
         x = 0;
         y = y + double(heightStr) + 2;
     end
+    height = y + double(heightStr);
 
     badge = badge + tempBadge4;
 end
-badge = badge + "</svg>";
+badge = sprintf("<svg xmlns=""http://www.w3.org/2000/svg"" " ...
+    + "xmlns:xlink=""http://www.w3.org/1999/xlink"" role=""img"" " ...
+    + "height=""%.0f"" width=""%.0f"">", ...
+    height, width) + badge + "</svg>";
 writelines(badge, "./artifacts/badge.svg");
