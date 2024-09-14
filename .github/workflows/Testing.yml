@@ -44,9 +44,9 @@ jobs:
         shell: bash
         run: |
           echo "{
-            os: \"${{matrix.os}}\",
-            version: \"${{matrix.version}}\",
-            status: \"fail\"
+            \"os\": \"${{matrix.os}}\",
+            \"version\": \"${{matrix.version}}\",
+            \"status\": \"fail\"
           }" > ${{matrix.os}}-${{matrix.version}}-results.json
 
       - name: Setup MATLAB
@@ -61,9 +61,9 @@ jobs:
         shell: bash
         run: |
           echo "{
-            os: \"${{matrix.os}}\",
-            version: \"${{matrix.version}}\",
-            status: \"pass\"
+            \"os\": \"${{matrix.os}}\",
+            \"version\": \"${{matrix.version}}\",
+            \"status\": \"pass\"
           }" > ${{matrix.os}}-${{matrix.version}}-results.json
           
       - name: upload artifact
