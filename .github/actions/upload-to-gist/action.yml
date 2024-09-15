@@ -37,7 +37,7 @@ runs:
     - name: checkout gist
       shell: bash
       run: |
-        git clone https://${{inputs.token}}@$gist_path ${{inputs.checkout_path}}
+        git clone https://${{inputs.token}}@${{gist_path}} ${{inputs.checkout_path}}
     
     - name: copy file
       shell: bash
