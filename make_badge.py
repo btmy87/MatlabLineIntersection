@@ -25,7 +25,9 @@ def make_badge():
     y = 0
     width = 0
     height = 0
-    for i, file in enumerate(glob.glob("./artifacts/*.json")):
+    file_list = glob.glob("./artifacts/*.json")
+    file_list.sort()
+    for i, file in enumerate(file_list):
         print(f"reading file {i}: {file}")
         with open(file, "r", encoding="utf-8") as fid:
             res = json.load(fid)
