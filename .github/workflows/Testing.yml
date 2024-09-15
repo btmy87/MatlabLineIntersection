@@ -98,11 +98,29 @@ jobs:
         shell: bash
         run: python make_badge.py
           
-      - name: upload badge
-        uses: exuanbo/actions-deploy-gist@v1
+      - name: checkout badge gist
+        uses: actions/checkout@v4
         with:
+          repository: gist.github.com/0f25477c0a3820599438e573cee862a3.git
           token: ${{ secrets.BADGE_SECRET }}
-          gist_id: 0f25477c0a3820599438e573cee862a3
-          file_path: ./artifacts/badge.svg
-          file_type: binary
+          path: badge_gist
+
+      - name: upload badge to gist
+        shell: bash
+        run: |
+          cp artifacts/badge.svg badge_gist/badge.svg
+          cd badge_gist
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add badge.svg
+          git commit -m "Badge generated in github actions"
+          git push     
+
+      #- name: upload badge
+      #  uses: exuanbo/actions-deploy-gist@v1
+      #  with:
+      #    token: ${{ secrets.BADGE_SECRET }}
+      #    gist_id: 0f25477c0a3820599438e573cee862a3
+      #    file_path: ./artifacts/badge.svg
+      #    file_type: binary
 
