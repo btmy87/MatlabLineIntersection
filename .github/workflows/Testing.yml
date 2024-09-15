@@ -112,5 +112,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add badge.svg
-          git commit -m "Badge generated in github actions"
-          git push     
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Badge generated in github actions"
+            git push     
+          fi
