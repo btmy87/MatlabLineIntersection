@@ -22,13 +22,12 @@ jobs:
     strategy:
       matrix: 
         version: [R2024b, R2023b, R2022b, R2021a]
-        #os: [ubuntu-latest, windows-latest]
-        os: [ubuntu-latest]
-        #include:
-        #  - os: macos-14
-        #    version: R2024b
-        #  - os: macos-14
-        #    version: R2023b
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: macos-14
+            version: R2024b
+          - os: macos-14
+            version: R2023b
       fail-fast: false
       
     # The type of runner that the job will run on
@@ -100,12 +99,6 @@ jobs:
         shell: bash
         run: python make_badge.py
           
-      #- name: checkout badge gist
-      #  uses: actions/checkout@v4
-      #  with:
-      #    repository: gist.github.com/0f25477c0a3820599438e573cee862a3.git
-      #    token: ${{ secrets.BADGE_SECRET }}
-      #    path: badge_gist
       - name: checkout badge gist
         shell: bash
         run: |
@@ -121,12 +114,3 @@ jobs:
           git add badge.svg
           git commit -m "Badge generated in github actions"
           git push     
-
-      #- name: upload badge
-      #  uses: exuanbo/actions-deploy-gist@v1
-      #  with:
-      #    token: ${{ secrets.BADGE_SECRET }}
-      #    gist_id: 0f25477c0a3820599438e573cee862a3
-      #    file_path: ./artifacts/badge.svg
-      #    file_type: binary
-
