@@ -48,12 +48,13 @@ runs:
       shell: bash
       working-directory: ${{inputs.checkout_path}}
       run: |
-        git config user.name \"${{inputs.git_name}}\"
-        git config user.email \"${{inputs.git_email}}\"
+        echo "$PWD"
+        git config user.name "${{inputs.git_name}}"
+        git config user.email "${{inputs.git_email}}"
         git add ${{inputs.file_name}}
         if ! git diff-index --quiet HEAD; then
           echo "Commiting changes to gist"
-          git commit -m \"${{inputs.git_message}}\"
+          git commit -m "${{inputs.git_message}}"
           git push     
         else
           echo "No changes to commit"
