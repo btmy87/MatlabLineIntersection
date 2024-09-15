@@ -1,0 +1,60 @@
+name: 'upload-to-gist'
+description: 'upload a file to gist'
+author: 'btmy87'
+inputs:
+  gist_path:
+    # something like gist.github.com/<gist_id>.git
+    description: 'path to download gist, not including https://'
+    required: true
+  file_name:
+    description: 'name of file in gist'
+    required: true
+  file_path:
+    description: 'path of file to upload, including file name'
+    required: true
+  token:
+    description: 'access token with gist scope'
+    requried: true
+  checkout_path:
+    description: 'path for checking out gist, shouldn''t exist'
+    required: true
+    default: 'mygist'
+  git_name:
+    description: 'name to use for git checkin'
+    required: true
+    default: 'github-actions[bot]'
+  git_email:
+    description: 'email address for git checkin'
+    required: true
+    default: '41898282+github-actions[bot]@users.noreply.github.com'
+  git_message:
+    description: 'commit message for git checkin'
+    requried: true
+    default: 'Uploaded from github actions'
+runs:
+  using: 'composite'
+  steps:
+    - name: checkout gist
+      shell: bash
+      run: |
+        git clone https://${{inputs.token}}@$gist_path ${{inputs.checkout_path}}
+    
+    - name: copy file
+      shell: bash
+      run: |
+        cp ${{inputs.file_path}} ${{inputs.checkout_path}}/${{inputs.file_name}}
+
+    - name: upload to gist
+      shell: bash
+      working-directory: ${{inputs.checkout_path}}
+      run: |
+        git config user.name \"${{inputs.git_name}}\"
+        git config user.email \"${{inputs.git_email}}\"
+        git add ${{inputs.file_name}}
+        if ! git diff-index --quiet HEAD; then
+          echo "Commiting changes to gist"
+          git commit -m \"${{inputs.git_message}}\"
+          git push     
+        else
+          echo "No changes to commit"
+        fi

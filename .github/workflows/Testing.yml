@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
@@ -22,12 +23,14 @@ jobs:
     strategy:
       matrix: 
         version: [R2024b, R2023b, R2022b, R2021a]
-        os: [ubuntu-latest, windows-latest]
-        include:
-          - os: macos-14
-            version: R2024b
-          - os: macos-14
-            version: R2023b
+        # shorter list for testing
+        os: [ubuntu-latest]
+        #os: [ubuntu-latest, windows-latest]
+        #include:
+        #  - os: macos-14
+        #    version: R2024b
+        #  - os: macos-14
+        #    version: R2023b
       fail-fast: false
       
     # The type of runner that the job will run on
@@ -98,21 +101,30 @@ jobs:
       - name: make badge svg
         shell: bash
         run: python make_badge.py
-          
-      - name: checkout badge gist
-        shell: bash
-        run: |
-          git clone https://${{secrets.BADGE_SECRET}}@$badge_gist $badge_dir
 
       - name: upload badge to gist
-        shell: bash
-        run: |
-          cp artifacts/badge.svg $badge_dir
-          cd $badge_dir
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add badge.svg
-          if ! git diff-index --quiet HEAD; then
-            git commit -m "Badge generated in github actions"
-            git push     
-          fi
+        uses: ./github/actions/upload-to-gist
+        with:
+          file_name: badge.svg
+          file_path: ./artifacts/badge.svg
+          gist_path: gist.github.com/0f25477c0a3820599438e573cee862a3.git
+          token: ${{secrets.BADGE_SECRET}}
+
+          
+      #- name: checkout badge gist
+      #  shell: bash
+      #  run: |
+      #    git clone https://${{secrets.BADGE_SECRET}}@$badge_gist $badge_dir
+
+      #- name: upload badge to gist
+      #  shell: bash
+      #  run: |
+      #    cp artifacts/badge.svg $badge_dir
+      #    cd $badge_dir
+      #    git config user.name "github-actions[bot]"
+      #    git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      #    git add badge.svg
+      #    if ! git diff-index --quiet HEAD; then
+      #      git commit -m "Badge generated in github actions"
+      #      git push     
+      #    fi
