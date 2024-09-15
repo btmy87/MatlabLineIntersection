@@ -103,7 +103,7 @@ jobs:
         run: python make_badge.py
 
       - name: upload badge to gist
-        uses: ./github/actions/upload-to-gist
+        uses: ./.github/actions/upload-to-gist
         with:
           file_name: badge.svg
           file_path: ./artifacts/badge.svg
